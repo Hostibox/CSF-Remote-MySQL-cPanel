@@ -10,6 +10,13 @@ touch /etc/csf/remotemysql.allow
 cp ./remote-mysql-csf-add.sh /usr/local/cpanel/3rdparty/bin/remote-mysql-csf-add.sh
 cp ./remote-mysql-csf-del.sh /usr/local/cpanel/3rdparty/bin/remote-mysql-csf-del.sh
 
+# Set file permissions
+chmod 755 /usr/local/cpanel/3rdparty/bin/remote-mysql-csf-add.sh
+chmod 755 /usr/local/cpanel/3rdparty/bin/remote-mysql-csf-del.sh
+
+chown root:root /usr/local/cpanel/3rdparty/bin/remote-mysql-csf-add.sh
+chown root:root /usr/local/cpanel/3rdparty/bin/remote-mysql-csf-del.sh
+
 # Installing hooks
 /usr/local/cpanel/bin/manage_hooks add script /usr/local/cpanel/3rdparty/bin/remote-mysql-csf-add.sh --manual --category Cpanel --event UAPI::Mysql::add_host --stage=post --escalateprivs 1
 /usr/local/cpanel/bin/manage_hooks add script /usr/local/cpanel/3rdparty/bin/remote-mysql-csf-del.sh --manual --category Cpanel --event UAPI::Mysql::delete_host --stage=post --escalateprivs 1
