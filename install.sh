@@ -23,6 +23,7 @@ chown root:root /usr/local/cpanel/3rdparty/bin/remote-mysql-csf-del.sh
 
 # Import existing Remote MySQL hosts
 mysql mysql -e "select Host,User from user where Host!='localhost' group by Host;" | awk {'print "tcp:in:d=3306:s=" $1'} | sed "s/\%//g" | egrep "[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}" | grep -v "127.0.0.1" | sort | uniq >> /etc/csf/remotemysql.allow
+mysql mysql -e "select Host,User from user where Host!='localhost' group by Host;" | awk {'print "tcp|out|d=3306|s=" $1'} | sed "s/\%//g" | egrep "[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}" | grep -v "127.0.0.1" | sort | uniq >> /etc/csf/remotemysql.allow
 
 # Remove any duplicate hosts
 cat /etc/csf/remotemysql.allow | uniq > /tmp/remotemysql.allow

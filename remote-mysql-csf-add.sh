@@ -55,9 +55,12 @@ else
     fi
 fi
 
-RULE="tcp|in|d=3306|s=$MYSQL_IP"
+RULE1="tcp|in|d=3306|s=$MYSQL_IP"
+RULE2="tcp|out|d=3306|s=$MYSQL_IP"
 
-grep -qF -- "$RULE" "$CSF_CONFIG_FILE" || echo "$RULE" >> "$CSF_CONFIG_FILE"
+grep -qF -- "$RULE1" "$CSF_CONFIG_FILE" || echo "$RULE1" >> "$CSF_CONFIG_FILE"
+grep -qF -- "$RULE2" "$CSF_CONFIG_FILE" || echo "$RULE2" >> "$CSF_CONFIG_FILE"
+
 log "Hostname added: $MYSQL_IP"
 csf -r
 

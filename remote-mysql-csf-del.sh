@@ -55,9 +55,12 @@ else
     fi
 fi
 
-RULE="tcp|in|d=3306|s=$MYSQL_IP"
+RULE1="tcp|in|d=3306|s=$MYSQL_IP"
+RULE2="tcp|out|d=3306|s=$MYSQL_IP"
 
-sed -i "/$RULE/d" "$CSF_CONFIG_FILE"
+sed -i "/$RULE1/d" "$CSF_CONFIG_FILE"
+sed -i "/$RULE2/d" "$CSF_CONFIG_FILE"
+
 log "IP removed: $MYSQL_IP"
 csf -r
 
