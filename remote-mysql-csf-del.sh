@@ -62,6 +62,6 @@ sed -i "/$RULE1/d" "$CSF_CONFIG_FILE"
 sed -i "/$RULE2/d" "$CSF_CONFIG_FILE"
 
 log "IP removed: $MYSQL_IP"
-csf -r
+/usr/sbin/csf -r
 
 rm -f $TMP_FILE
